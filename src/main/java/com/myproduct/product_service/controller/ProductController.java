@@ -28,4 +28,11 @@ public class ProductController {
 		productService.createProduct(productRequest);
 	}
 
+	@PostMapping("/{id}/updateProduct")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	public ProductResponce CreateProduct(@PathVariable String id,@RequestBody ProductRequest productRequest) {
+
+		return productService.updateProduct(id, productRequest);
+	}
+
 }

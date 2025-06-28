@@ -1,6 +1,9 @@
 package com.myproduct.product_service.services;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 import com.myproduct.product_service.dto.ProductResponce;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,15 @@ public class ProductService {
 		productRepository.save(newProduct);
 		log.info("Product created : "+newProduct.getId());
 
+	}
+
+	public ProductResponce updateProduct(String id,ProductRequest productRequest){
+		Optional<Product> productDetails = productRepository.findById(id);
+		Product productUpdateRequest = productDetails.get().toBuilder().name(productRequest.getName()).price(productRequest.getPrice())
+				.description(productRequest.getDescription()).build();
+		Product savedProduct = productRepository.save(productUpdateRequest);
+		return ProductResponce.builder().name(savedProduct.getName()).id(savedProduct.getId())
+				.price(savedProduct.getPrice()).description(savedProduct.getDescription()).build();
 	}
 
 }
