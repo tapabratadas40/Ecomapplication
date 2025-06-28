@@ -1,13 +1,10 @@
 package com.myproduct.product_service.services;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import com.myproduct.product_service.dto.ProductResponce;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.myproduct.product_service.dto.ProductRequest;
 import com.myproduct.product_service.entity.Product;
 import com.myproduct.product_service.productrepository.ProductRepository;
