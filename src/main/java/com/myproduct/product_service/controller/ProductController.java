@@ -23,10 +23,8 @@ public class ProductController {
 	}
 	
 	@PostMapping("/products")
-	@ResponseStatus(HttpStatus.CREATED)
-	public void CreateProduct(@RequestBody ProductRequest productRequest) {
-
-		productService.createProduct(productRequest);
+	public ResponseEntity<?> CreateProduct(@RequestBody ProductRequest productRequest) {
+		return new ResponseEntity<>(productService.createProduct(productRequest),HttpStatus.CREATED);
 	}
 
 	@PostMapping("/{id}/products")
