@@ -4,6 +4,7 @@ import java.util.List;
 import com.myproduct.product_service.dto.ProductResponce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.myproduct.product_service.dto.ProductRequest;
 import com.myproduct.product_service.services.ProductService;
@@ -15,9 +16,9 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	@GetMapping("/products")
-	public  List<ProductResponce> getAllProducts(){
+	public ResponseEntity<List<ProductResponce>> getAllProducts(){
 
-        return productService.getListOfProduct();
+        return new ResponseEntity<>(productService.getListOfProduct(),HttpStatus.OK);
 		
 	}
 	
@@ -29,15 +30,14 @@ public class ProductController {
 	}
 
 	@PostMapping("/{id}/products")
-	@ResponseStatus(HttpStatus.ACCEPTED)
-	public ProductResponce CreateProduct(@PathVariable String id,@RequestBody ProductRequest productRequest) {
+	public ResponseEntity<ProductResponce> CreateProduct(@PathVariable String id,@RequestBody ProductRequest productRequest) {
 
-		return productService.updateProduct(id, productRequest);
+		return new ResponseEntity<>(productService.updateProduct(id, productRequest),HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}/products")
-	public ProductResponce getProductByProductId(@PathVariable String id){
-		return productService.getProductByProductId(id);
+	public ResponseEntity<ProductResponce> getProductByProductId(@PathVariable String id){
+		return new ResponseEntity<>(productService.getProductByProductId(id),HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}/products")
