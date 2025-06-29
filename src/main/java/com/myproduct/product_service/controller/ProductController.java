@@ -14,25 +14,37 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
-	@GetMapping("/allProducts")
+	@GetMapping("/products")
 	public  List<ProductResponce> getAllProducts(){
 
         return productService.getListOfProduct();
 		
 	}
 	
-	@PostMapping("/createProduct")
+	@PostMapping("/products")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void CreateProduct(@RequestBody ProductRequest productRequest) {
 
 		productService.createProduct(productRequest);
 	}
 
-	@PostMapping("/{id}/updateProduct")
+	@PostMapping("/{id}/products")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public ProductResponce CreateProduct(@PathVariable String id,@RequestBody ProductRequest productRequest) {
 
 		return productService.updateProduct(id, productRequest);
+	}
+
+	@GetMapping("/{id}/products")
+	public ProductResponce getProductByProductId(@PathVariable String id){
+		return productService.getProductByProductId(id);
+	}
+
+	@DeleteMapping("/{id}/products")
+	public String deleteProduct(@PathVariable String id){
+
+		productService.deleteProduct(id);
+		return "Product Deleted";
 	}
 
 }

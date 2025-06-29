@@ -32,6 +32,11 @@ public class ProductService {
 				.description(products.getDescription()).price(products.getPrice()).build();
 	}
 
+	public ProductResponce getProductByProductId(String productId){
+		Optional<Product> byId = productRepository.findById(productId);
+		return mapToProductResponce(byId.get());
+	}
+
 	public void createProduct(ProductRequest product) {
 		
 		Product newProduct = Product.builder().name(product.getName()).
@@ -51,4 +56,8 @@ public class ProductService {
 				.price(savedProduct.getPrice()).description(savedProduct.getDescription()).build();
 	}
 
+	public void deleteProduct(String id){
+		Optional<Product> productDetails = productRepository.findById(id);
+		productRepository.delete(productDetails.get());
+	}
 }
